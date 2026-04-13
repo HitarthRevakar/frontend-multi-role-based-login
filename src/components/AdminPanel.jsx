@@ -136,10 +136,17 @@ const AdminPanel = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((u, index) => (
-              <tr key={u.id}>
-                <td>{index + 1}</td>
-                <td>{u.name}</td>
+            {users.length === 0 ? (
+              <tr>
+                <td colSpan="6" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
+                  No other users found in the system.
+                </td>
+              </tr>
+            ) : (
+              users.map((u, index) => (
+                <tr key={u.id}>
+                  <td>{index + 1}</td>
+                  <td>{u.name}</td>
                 <td>{u.email}</td>
                 <td><span style={{ textTransform: 'capitalize' }}>{u.role}</span></td>
                 <td>
