@@ -17,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       
       {/* Both User and Admin can access the basic Dashboard */}
       <Route 
