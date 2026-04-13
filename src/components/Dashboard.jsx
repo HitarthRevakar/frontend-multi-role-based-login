@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   return (
     <div className="glass-panel dashboard-panel">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '15px' }}>
         <h1 className="title" style={{ margin: 0 }}>Dashboard</h1>
         <button onClick={handleLogout} className="btn btn-secondary" style={{ width: 'auto', padding: '8px 16px' }}>
           Logout
@@ -33,7 +33,7 @@ const Dashboard = () => {
           Here is an overview of your current user workspace.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
           
           {/* Action Card */}
           <div style={{

@@ -24,57 +24,59 @@ const Login = () => {
   };
 
   return (
-    <div className="glass-panel">
-      <h1 className="title">Welcome Back</h1>
-      <p className="subtitle">Sign in to your account</p>
-      
-      <form onSubmit={handleSubmit} noValidate>
-        <div className="input-group">
-          <label className="input-label">Email</label>
-          <input
-            type="email"
-            className="input-field"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="admin@system.com"
-            required
-          />
-        </div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '20px', width: '100%', boxSizing: 'border-box' }}>
+      <div className="glass-panel" style={{ width: '100%', maxWidth: '400px' }}>
+        <h1 className="title">Welcome Back</h1>
+        <p className="subtitle">Sign in to your account</p>
         
-        <div className="input-group">
-          <label className="input-label">Password</label>
-          <div style={{ position: 'relative' }}>
+        <form onSubmit={handleSubmit} noValidate>
+          <div className="input-group">
+            <label className="input-label">Email</label>
             <input
-              type={showPassword ? 'text' : 'password'}
+              type="email"
               className="input-field"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@system.com"
               required
-              style={{ paddingRight: '40px' }}
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              style={{
-                position: 'absolute',
-                right: '10px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--text-color)',
-                fontSize: '14px'
-              }}
-            >
-              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
-            </button>
           </div>
-        </div>
-        
-        <button type="submit" className="btn" style={{ marginBottom: '15px' }}>Sign In</button>
-      </form>
+          
+          <div className="input-group">
+            <label className="input-label">Password</label>
+            <div style={{ position: 'relative' }}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                className="input-field"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                style={{ paddingRight: '40px' }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute',
+                  right: '10px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'var(--text-color)',
+                  fontSize: '14px'
+                }}
+              >
+                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+              </button>
+            </div>
+          </div>
+          
+          <button type="submit" className="btn" style={{ marginBottom: '15px' }}>Sign In</button>
+        </form>
+      </div>
     </div>
   );
 };

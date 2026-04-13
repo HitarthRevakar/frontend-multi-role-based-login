@@ -53,7 +53,7 @@ const AdminPanel = () => {
       }
       await api.put(`/users/${id}/status`, { is_active: !currentStatus });
       fetchUsers(); // refresh data
-    } catch (err) {
+    } catch (_err) {
       alert("Failed to update status");
     }
   };
@@ -66,7 +66,7 @@ const AdminPanel = () => {
     try {
       const res = await api.get(`/users/${u.id}/permissions`);
       setPermissions(res.data);
-    } catch (err) {
+    } catch {
       alert("Failed to load permissions");
     } finally {
       setLoadingPerms(false);
@@ -85,7 +85,8 @@ const AdminPanel = () => {
       await api.post(`/users/${selectedUser.id}/permissions`, { permissionIds: grantedIds });
       toast.success("Permissions updated successfully!");
       setSelectedUser(null);
-    } catch(err) {
+    } catch (err) {
+      console.error('Save permissions error:', err);
       toast.error("Failed to save permissions.");
     }
   };
@@ -108,14 +109,14 @@ const AdminPanel = () => {
 
   return (
     <div className="glass-panel dashboard-panel" style={{position: 'relative'}}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-        <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', flexWrap: 'wrap', gap: '15px' }}>
+        <div style={{ minWidth: '200px', flex: '1' }}>
           <h1 className="title" style={{ margin: 0, textAlign: 'left' }}>Admin Panel</h1>
           <p style={{ margin: '5px 0 0', color: 'var(--text-muted)', fontSize: '14px' }}>
             Logged in as <strong>{user?.name}</strong> ({user?.email})
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div className="btn-group" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           <button onClick={() => setShowAddUserModal(true)} className="btn" style={{ width: 'auto', padding: '8px 16px' }}>
             + Create New User
           </button>
@@ -200,9 +201,9 @@ const AdminPanel = () => {
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, 
           backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', 
-          justifyContent: 'center', alignItems: 'center'
+          justifyContent: 'center', alignItems: 'center', padding: '20px', zIndex: 1000
         }}>
-          <div className="glass-panel" style={{ width: '350px', background: '#fff' }}>
+          <div className="glass-panel" style={{ width: '90%', maxWidth: '400px', background: '#fff', maxHeight: '80vh', overflowY: 'auto' }}>
             <h3>Permissions: {selectedUser.name}</h3>
             {loadingPerms ? (
               <p>Loading...</p>
@@ -238,9 +239,9 @@ const AdminPanel = () => {
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, 
           backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', 
-          justifyContent: 'center', alignItems: 'center'
+          justifyContent: 'center', alignItems: 'center', padding: '20px', zIndex: 1000
         }}>
-          <div className="glass-panel" style={{ width: '350px', background: '#fff' }}>
+          <div className="glass-panel" style={{ width: '90%', maxWidth: '400px', background: '#fff', maxHeight: '80vh', overflowY: 'auto' }}>
             <h3>Create New User</h3>
             <form onSubmit={handleCreateUser} style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
               <input 

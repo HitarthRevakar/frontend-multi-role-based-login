@@ -79,7 +79,7 @@ const TaskBoard = () => {
 
   return (
     <div className="glass-panel dashboard-panel">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '15px' }}>
         <h1 className="title" style={{ margin: 0 }}>Task Management</h1>
         <button style={{ padding: '8px 16px', width: 'auto'}} className="btn btn-secondary" onClick={() => navigate('/dashboard')}>
           Back to Dashboard
@@ -94,19 +94,21 @@ const TaskBoard = () => {
         <>
           {/* Create Task Form */}
           {can('tasks:create') && (
-            <form onSubmit={handleCreate} style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+            <form onSubmit={handleCreate} style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
               <input 
                 type="text" 
                 className="input-field" 
                 placeholder="What needs to be done?" 
                 value={newTaskTitle}
                 onChange={(e) => setNewTaskTitle(e.target.value)}
+                style={{ flex: '1', minWidth: '200px' }}
               />
               <button 
                 type="submit" 
                 className="btn" 
                 style={{ 
                   width: '150px', 
+                  minWidth: '100px',
                   opacity: !newTaskTitle.trim() ? 0.5 : 1,
                   cursor: !newTaskTitle.trim() ? 'not-allowed' : 'pointer'
                 }}
