@@ -40,8 +40,11 @@ const TaskBoard = () => {
   };
 
   useEffect(() => {
-    fetchPermissions();
-    fetchTasks();
+    const loadData = async () => {
+      await fetchPermissions();
+      await fetchTasks();
+    };
+    loadData();
   }, []);
 
   // Helpers to check permission smoothly
