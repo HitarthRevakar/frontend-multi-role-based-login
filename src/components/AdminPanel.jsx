@@ -53,7 +53,7 @@ const AdminPanel = () => {
       }
       await api.put(`/users/${id}/status`, { is_active: !currentStatus });
       fetchUsers(); // refresh data
-    } catch (_err) {
+    } catch {
       alert("Failed to update status");
     }
   };
@@ -109,20 +109,20 @@ const AdminPanel = () => {
 
   return (
     <div className="glass-panel dashboard-panel" style={{position: 'relative'}}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', flexWrap: 'wrap', gap: '15px' }}>
-        <div style={{ minWidth: '200px', flex: '1' }}>
-          <h1 className="title" style={{ margin: 0, textAlign: 'left' }}>Admin Panel</h1>
-          <p style={{ margin: '5px 0 0', color: 'var(--text-muted)', fontSize: '14px' }}>
+      <div style={{ marginBottom: '30px' }}>
+        <h1 className="title" style={{ margin: '0 0 8px 0', textAlign: 'left' }}>Admin Panel</h1>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '15px' }}>
+          <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '14px' }}>
             Logged in as <strong>{user?.name}</strong> ({user?.email})
           </p>
-        </div>
-        <div className="btn-group" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          <button onClick={() => setShowAddUserModal(true)} className="btn" style={{ width: 'auto', padding: '8px 16px' }}>
-            + Create New User
-          </button>
-          <button onClick={handleLogout} className="btn btn-secondary" style={{ width: 'auto', padding: '8px 16px' }}>
-            Logout
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+            <button onClick={() => setShowAddUserModal(true)} className="btn" style={{ width: 'fit-content', padding: '10px 20px', whiteSpace: 'nowrap' }}>
+              + Create New User
+            </button>
+            <button onClick={handleLogout} className="btn btn-secondary" style={{ width: 'fit-content', padding: '10px 20px', whiteSpace: 'nowrap' }}>
+              Logout
+            </button>
+          </div>
         </div>
       </div>
       
