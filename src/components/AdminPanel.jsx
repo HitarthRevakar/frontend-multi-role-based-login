@@ -8,6 +8,7 @@ const AdminPanel = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   // Permissions Modal State
@@ -22,11 +23,16 @@ const AdminPanel = () => {
   const [newPassword, setNewPassword] = useState('');
 
   const fetchUsers = async () => {
+    setLoading(true);
     try {
       const response = await api.get('/users');
-      setUsers(response.data);
+      setUsers(Array.isArray(response.data) ? response.data : []);
+      setError('');
     } catch (err) {
-      setError('Failed to fetch users.');
+      console.error('Fetch users error:', err);
+      setError(err.response?.data?.message || 'Failed to fetch users. Please check your connection.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -136,7 +142,15 @@ const AdminPanel = () => {
             </tr>
           </thead>
           <tbody>
-            {users.length === 0 ? (
+            {loading ? (
+              <tr>
+                <td colSpan="6" style={{ textAlign: 'center', padding: '30px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
+                    Loading users...
+                  </div>
+                </td>
+              </tr>
+            ) : users.length === 0 ? (
               <tr>
                 <td colSpan="6" style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
                   No other users found in the system.
@@ -176,7 +190,7 @@ const AdminPanel = () => {
                   </div>
                 </td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
       </div>
