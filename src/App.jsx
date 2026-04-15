@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,6 +12,14 @@ import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
 function App() {
+  // Pre-warm the backend server on app load (wakes Render from sleep)
+  useEffect(() => {
+    const API_BASE = window.location.hostname === 'localhost'
+      ? 'http://localhost:5000'
+      : 'https://backend-multi-role-based-login-1.onrender.com';
+    fetch(`${API_BASE}/health`).catch(() => {});
+  }, []);
+
   return (
     <>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar theme="colored" />
