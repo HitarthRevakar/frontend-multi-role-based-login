@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an Axios instance
 const LOCAL_API_URL = 'http://localhost:5000/api';
-const LIVE_API_URL = 'https://backend-multi-role-based-login-1.onrender.com/api';
+const LIVE_API_URL = 'https://backend-multi-role-based-login-2.onrender.com/api';
 
 // Use live URL by default, or local URL if running on localhost
 // You can manually override this by hardcoding baseURL to LOCAL_API_URL or LIVE_API_URL

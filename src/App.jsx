@@ -16,8 +16,8 @@ function App() {
   useEffect(() => {
     const API_BASE = window.location.hostname === 'localhost'
       ? 'http://localhost:5000'
-      : 'https://backend-multi-role-based-login-1.onrender.com';
-    fetch(`${API_BASE}/health`).catch(() => {});
+      : 'https://backend-multi-role-based-login-2.onrender.com';
+    fetch(`${API_BASE}/health`).catch(() => { });
   }, []);
 
   return (
@@ -27,38 +27,38 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-      
-      {/* Both User and Admin can access the basic Dashboard */}
-      <Route 
-        path="/dashboard" 
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        } 
-      />
 
-      {/* Only Admin can access the Admin Panel */}
-      <Route 
-        path="/admin" 
-        element={
-          <ProtectedRoute allowedRoles={['admin']}>
-            <AdminPanel />
-          </ProtectedRoute>
-        } 
-      />
+        {/* Both User and Admin can access the basic Dashboard */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route 
-        path="/tasks" 
-        element={
-          <ProtectedRoute>
-            <TaskBoard />
-          </ProtectedRoute>
-        } 
-      />
-      
-      <Route path="*" element={<Navigate to="/login" replace />} />
-    </Routes>
+        {/* Only Admin can access the Admin Panel */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminPanel />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/tasks"
+          element={
+            <ProtectedRoute>
+              <TaskBoard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
     </>
   )
 }
